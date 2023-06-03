@@ -1,0 +1,38 @@
+1. Cài đặt hệ điều hành cho Raspberry pi
+2. Thiết lập chia sẻ màn hình làm việc bằng VNC 
+3. Cài đặt hệ thống để streaming bằng Webcam USB
+
+cài đặt camera
+-sudo raspi-config
+
+Chụp hình, quay phim và live stream sử dụng camera trên Raspberry
+-sudo apt-get install fswebcam
+-sudo apt install ffmpeg
+-sudo apt-get install motion
+-sudo apt install autoconf automake build-essential pkgconf libtool git libzip-dev libjpeg-dev gettext libmicrohttpd-dev libavformat-dev libavcodec-dev libavutil-dev libswscale-dev libavdevice-dev default-libmysqlclient-dev libpq-dev libsqlite3-dev libwebp-dev
+-sudo wget https://github.com/Motion-Project/motion/releases/download/release-4.4.0/$(lsb_release -cs)_motion_4.4.0-1_armhf.deb
+-sudo dpkg -i $(lsb_release -cs)_motion_4.4.0-1_armhf.deb
+Chụp ảnh
+-fswebcam -r 1280x720 image.jpg
+quay video
+-ffmpeg -f v4l2 -r 25 -s 640x480 -i /dev/video0 video.avi
+Live stream bằng Webcam USB
+-sudo nano /etc/motion/motion.conf  => mở file motion.conf  
+- Thay đổi một số cài đặt trong tệp motion.conf:
++ “daemon” on
++ “framerate” 1000 đến 1500
++ “stream_port” 8081
++ “stream_localhost” off
++ “webcontrol_localhost” off
++ “movie_quality” 100
++ “width” 640
++ “height” 480
++ “post_capture” 5
+-sudo nano /etc/default/motion => Chuyển “start_motion_daemon” thành yes 
+-sudo service motion restart
+-sudo motion
+
+4. detect
+-git clone https://github.com/ultralytics/yolov5
+-pip install -r requirements.txt
+-py detect.py --weights file --source data 

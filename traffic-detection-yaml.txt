@@ -1,0 +1,8 @@
+train: /content/gdrive/MyDrive/TRAFFIC_DETECTION/datasheet/images/train
+val: /content/gdrive/MyDrive/TRAFFIC_DETECTION/datasheet/images/val
+
+# number of classes
+nc: 6
+
+# class names
+names: [ 'stop', 'left', 'right', 'straight', 'no_left', 'no_right' ]
